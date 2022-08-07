@@ -1,0 +1,10 @@
+{
+    "name": "AdminSpy",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/KinetsuDEV/VRisingAdminSpy",
+    "description": "Admin spy mod for V Rising",
+    "dependencies": [
+      "BepInEx-BepInExPack_V_Rising-1.0.0",
+      "molenzwiebel-Wetstone-1.1.0"
+    ]
+  }
