@@ -1,5 +1,5 @@
 # AdminSpy
-`Server side only` mod to spy admin actions.
+`Server side only` mod to notify users about admin actions.
 `Hot reload` enabled.
 
 ## Installation

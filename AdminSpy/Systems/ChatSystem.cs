@@ -9,7 +9,7 @@ namespace AdminSpy.Systems
         {
             if (chatEvent.Message.ToLower() == "!AdminSpy".ToLower())
             {
-                chatEvent.User.SendSystemMessage($"Hello {chatEvent.User.CharacterName}. AdminSpy is active!");
+                chatEvent.User.SendSystemMessage($"Hello {chatEvent.User.CharacterName}. AdminSpy is running!");
                 chatEvent.Cancel();
             }
         }
