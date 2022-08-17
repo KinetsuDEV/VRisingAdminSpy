@@ -1,4 +1,5 @@
-﻿using AdminSpy.Systems;
+﻿using AdminSpy.Configs;
+using AdminSpy.Systems;
 using BepInEx;
 using BepInEx.IL2CPP;
 using HarmonyLib;
@@ -25,6 +26,7 @@ namespace AdminSpy
             }
 
             LogUtils.Initialize(Log);
+            AdminSpyConfig.Initialize(Config);
 
             harmony = new Harmony(PluginInfo.PLUGIN_GUID);
             harmony.PatchAll(Assembly.GetExecutingAssembly());
@@ -41,6 +43,7 @@ namespace AdminSpy
 
             Chat.OnChatMessage -= ChatSystem.OnChatMessage;
 
+            Config.Clear();
             harmony.UnpatchSelf();
 
             return true;

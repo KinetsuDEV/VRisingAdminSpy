@@ -1,4 +1,5 @@
-﻿using AdminSpy.Utils;
+﻿using AdminSpy.Configs;
+using AdminSpy.Utils;
 using ProjectM;
 using ProjectM.Network;
 using Unity.Collections;
@@ -19,37 +20,43 @@ namespace AdminSpy.Systems
 
             foreach (var entity in entities)
             {
-                if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(AdminAuthEvent)))
-                    AnnounceAdminAuthCommand(entity);
+                if (AdminSpyConfig.AnnounceAuth.Value)
+                {
+                    if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(AdminAuthEvent)))
+                        AnnounceAdminAuthCommand(entity);
 
-                if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(DeauthAdminEvent)))
-                    AnnounceAdminDeauthCommand(entity);
+                    if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(DeauthAdminEvent)))
+                        AnnounceAdminDeauthCommand(entity);
+                }
 
-                if (WetstoneUtils.EntityManager.HasComponent<GiveDebugEvent>(entity))
+                if (AdminSpyConfig.AnnounceGive.Value && WetstoneUtils.EntityManager.HasComponent<GiveDebugEvent>(entity))
                     AnnounceGiveCommand(entity);
 
-                if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(ChangeDurabilityDebugEvent)))
+                if (AdminSpyConfig.AnnounceDurability.Value && WetstoneUtils.EntityManager.HasComponent(entity, nameof(ChangeDurabilityDebugEvent)))
                     AnnounceChangeDurabilityCommand(entity);
 
-                if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(ChangeHealthOfClosestToPositionDebugEvent)))
+                if (AdminSpyConfig.AnnounceHealth.Value && WetstoneUtils.EntityManager.HasComponent(entity, nameof(ChangeHealthOfClosestToPositionDebugEvent)))
                     AnnounceChangeHealthCommand(entity);
 
-                if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(PlayerTeleportDebugEvent)))
-                    AnnounceTeleportCommand(entity);
+                if (AdminSpyConfig.AnnounceTeleport.Value)
+                {
+                    if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(PlayerTeleportDebugEvent)))
+                        AnnounceTeleportCommand(entity);
 
-                if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(TeleportToPlayerLocationDebugEvent)))
-                    AnnounceTeleportToPlayerCommand(entity);
+                    if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(TeleportToPlayerLocationDebugEvent)))
+                        AnnounceTeleportToPlayerCommand(entity);
 
-                if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(TeleportPlayerToLocationDebugEvent)))
-                    AnnounceTeleportPlayerToCommand(entity);
+                    if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(TeleportPlayerToLocationDebugEvent)))
+                        AnnounceTeleportPlayerToCommand(entity);
 
-                if (WetstoneUtils.EntityManager.HasComponent(entity, "DebugTeleportToNetherEvent"))
-                    AnnounceTeleportToNetherCommand(entity);
+                    if (WetstoneUtils.EntityManager.HasComponent(entity, "DebugTeleportToNetherEvent"))
+                        AnnounceTeleportToNetherCommand(entity);
 
-                if (WetstoneUtils.EntityManager.HasComponent(entity, "DebugTeleportToEntityEvent"))
-                    AnnounceTeleportToWaypointCommand(entity);
+                    if (WetstoneUtils.EntityManager.HasComponent(entity, "DebugTeleportToEntityEvent"))
+                        AnnounceTeleportToWaypointCommand(entity);
+                }
 
-                if (WetstoneUtils.EntityManager.HasComponent(entity, nameof(SetUserAdminLevelAdminEvent)))
+                if (AdminSpyConfig.AnnounceAdminLevel.Value && WetstoneUtils.EntityManager.HasComponent(entity, nameof(SetUserAdminLevelAdminEvent)))
                     AnnounceSetAdminLevelCommand(entity);
             }
         }
